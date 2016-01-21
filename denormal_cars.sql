@@ -1,15 +1,25 @@
--- CREATE USER denormal_user;
+DROP USER IF EXISTS denormal_user;
 
--- CREATE DATABASE denormal_cars;
+CREATE USER denormal_user;
 
--- \i scripts/denormal_data.sql;
+DROP DATABASE IF EXISTS denormal_cars;
 
--- \dS
+CREATE DATABASE denormal_cars;
 
--- SELECT DISTINCT make_title FROM car_models;
+\c denormal_cars
 
--- SELECT DISTINCT model_title FROM car_models WHERE make_code='VOLKS';
+\i scripts/denormal_data.sql;
 
--- SELECT DISTINCT make_code, model_code, model_title, year FROM car_models WHERE make_code='LAM';
+\dS
 
--- SELECT DISTINCT * FROM car_models WHERE year BETWEEN 2010 AND 2015;
+SELECT DISTINCT make_title FROM car_models;
+SELECT COUNT( DISTINCT make_title ) FROM car_models;
+
+SELECT DISTINCT model_title FROM car_models WHERE make_code='VOLKS';
+SELECT COUNT( DISTINCT model_title ) FROM car_models WHERE make_code='VOLKS';
+
+SELECT DISTINCT make_code, model_code, model_title, year FROM car_models WHERE make_code='LAM';
+SELECT COUNT( DISTINCT CONCAT(  make_code, model_code, model_title, year ) ) FROM car_models WHERE make_code='LAM';
+
+SELECT * FROM car_models WHERE year BETWEEN 2010 AND 2015;
+SELECT COUNT( * ) FROM car_models WHERE year BETWEEN 2010 AND 2015;
