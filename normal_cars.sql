@@ -1,3 +1,5 @@
+\timing
+
 DROP USER IF EXISTS normal_user;
 
 CREATE USER normal_user;
@@ -38,7 +40,7 @@ CREATE TABLE IF NOT EXISTS model_codes_and_specs_by_brand
 INSERT INTO model_codes_and_specs_by_brand ( manufacturer_brand, model_codes, model_specs )
 SELECT DISTINCT make_title, model_code, model_title
 FROM car_models
-ORDER BY make_title ASC, model_code ASC;
+ORDER BY make_title ASC, model_title ASC;
 
 
 ---------- CREATES TABLE WITH ID NUMBER AND PRODUCTION YEAR
@@ -53,8 +55,3 @@ INSERT INTO production_year ( production_year )
 SELECT DISTINCT year
 FROM car_models
 ORDER BY year ASC;
-
-
-SELECT * FROM manufacturer_codes_and_brands;
-SELECT * FROM model_codes_and_specs_by_brand;
-SELECT * FROM production_year;
